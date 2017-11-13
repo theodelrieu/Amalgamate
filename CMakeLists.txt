@@ -15,8 +15,9 @@ else()
   target_sources(amalgamate PUBLIC juce_core_amalgam.cpp)
 endif()
 
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+if(WIN32)
+  target_compile_options(amalgamate PRIVATE /EHsc)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   target_link_libraries(amalgamate dl pthread)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   find_library(CORE_FOUNDATION CoreFoundation)
